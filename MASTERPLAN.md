@@ -1362,30 +1362,53 @@ Setiap fase harus **selesai sempurna dan teruji** sebelum melanjutkan ke fase be
 | 3 | Dual fulfillment mode | Fleksibel antara manual dan auto per produk |
 | 4 | QRIS sebagai default | Simple, satu pintu, low maintenance |
 | 5 | Gateway sebagai opsi toggle | Bisa dimatikan kapan saja tanpa breaking |
-| 6 | Dark theme default | Sesuai branding, modern look untuk digital store |
+| 6 | Dark theme default + light toggle | Sesuai branding, user choice tersedia |
 | 7 | Slot system terpisah | Netflix & ChatGPT punya kompleksitas sendiri |
 | 8 | Encrypted credentials | Keamanan data sensitif customer |
 | 9 | Email verification wajib | Mencegah spam account, enable password reset |
 | 10 | Incremental development | Kualitas terjaga, tidak overwhelming |
 
-### Hal yang Perlu Dibahas Lebih Lanjut
+### Keputusan Final dari Diskusi (16 Mei 2026)
 
-1. **Notifikasi real-time:** Apakah cukup dengan refresh halaman, atau perlu polling/long-polling untuk notifikasi baru?
-2. **Email notification:** Seberapa banyak email yang ingin dikirim ke customer? (order approved, payment confirmed, order completed, mendekati expired?)
-3. **Multi-language:** Apakah perlu support bahasa lain selain Indonesia?
-4. **Dark/Light mode toggle:** Atau fixed dark mode saja?
-5. **Mobile app (future):** Apakah ada rencana mobile app? Jika ya, kita bisa siapkan API sederhana dari awal.
-6. **Refund policy:** Bagaimana mekanisme refund jika ada? Manual transfer balik?
-7. **Auto-renewal reminder:** Apakah perlu email reminder H-3 sebelum expired?
-8. **Pricing tier:** Apakah akan ada perubahan harga? Perlu history harga?
+| # | Pertanyaan | Keputusan |
+|---|-----------|-----------|
+| 1 | Email notification trigger | **Hanya 2:** Saat order COMPLETED + Reminder mendekati expired |
+| 2 | Dark/Light mode | **Toggle** — dark sebagai default, user bisa switch ke light |
+| 3 | Cron job | **Tersedia di cPanel** — digunakan untuk: auto-expire payment, reminder email |
+| 4 | Refund mechanism | **Manual transfer balik** oleh admin |
+| 5 | Auto-renewal reminder | **Ya** — Email H-3 sebelum masa aktif expired |
+| 6 | Payment gateway provider | **Belum ditentukan** — disiapkan arsitekturnya, provider dipilih nanti |
+| 7 | Landing page pricing | **Public** — harga ditampilkan di landing page tanpa perlu login |
+
+### Implikasi Teknis dari Keputusan
+
+**Email (minimal):**
+- Hanya kirim email saat: verifikasi akun, reset password, order completed, reminder H-3 expired
+- Ini meminimalkan risiko hit email limit shared hosting
+
+**Cron Job yang Dibutuhkan:**
+1. `check_payment_expired.php` — Jalankan tiap 5 menit, cek order yang melewati payment deadline
+2. `send_expiry_reminder.php` — Jalankan tiap hari jam 08:00, kirim reminder H-3 expired
+3. `update_expired_slots.php` — Jalankan tiap hari, update status slot Netflix/ChatGPT yang sudah expired
+
+**Light/Dark Mode:**
+- Default: Dark (`#171717`)
+- Toggle disimpan di localStorage (browser)
+- CSS menggunakan class-based switching (`.dark` / `.light` di `<body>`)
+- Semua komponen harus punya varian warna untuk kedua mode
+
+**Landing Page Public Pricing:**
+- Produk, varian, dan harga ditampilkan di landing page
+- Customer bisa lihat semua info sebelum register
+- Tombol "Order" di landing page → redirect ke login/register
 
 ### Constraints & Limitations
 
 - **No Node.js/NPM:** Hosting tidak support → semua frontend tanpa build step
 - **No WebSocket:** Shared hosting → gunakan polling jika perlu real-time
-- **No Cron Job (mungkin):** Cek apakah cPanel support cron → jika tidak, gunakan "lazy check" (cek saat akses)
+- **Cron Job:** ✅ Tersedia — gunakan untuk auto-expire dan reminder
 - **Storage limit:** Perhatikan ukuran file upload (bukti bayar, screenshot garansi)
-- **Email limit:** Shared hosting biasanya limit email/jam → batch jika perlu kirim banyak
+- **Email limit:** Shared hosting biasanya limit email/jam → minimal email strategy sudah diadopsi
 
 ---
 
@@ -1400,4 +1423,4 @@ Dokumen ini adalah **living document** yang akan terus di-update seiring perkemb
 *Dokumen ini dibuat sebagai panduan pengembangan RZDK Store SaaS Panel. Segala perubahan keputusan arsitektur harus didokumentasikan di sini.*
 
 **Last Updated:** 16 Mei 2026  
-**Status:** Draft v1.0 — Menunggu review & feedback owner
+**Status:** v1.1 — Keputusan final telah ditetapkan, siap eksekusi Fase 1
