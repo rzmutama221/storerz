@@ -140,6 +140,84 @@
     </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq" class="py-16 border-t border-gray-200 dark:border-dark-border">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl sm:text-3xl font-heading font-bold">FAQ</h2>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">Pertanyaan yang sering ditanyakan</p>
+        </div>
+
+        <div class="space-y-3" x-data="{ open: null }">
+            <!-- FAQ 1 -->
+            <div class="border border-gray-200 dark:border-dark-border rounded-lg overflow-hidden">
+                <button @click="open = open === 1 ? null : 1" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-dark-card transition-colors">
+                    <span class="font-medium text-sm">Bagaimana cara order?</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" :class="open === 1 && 'rotate-180'"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open === 1" x-transition class="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400">
+                    Daftar akun gratis, pilih produk dan varian yang diinginkan, lalu buat order. Admin akan approve dan Anda bisa melakukan pembayaran via QRIS. Setelah pembayaran dikonfirmasi, produk akan dikirim melalui dashboard.
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="border border-gray-200 dark:border-dark-border rounded-lg overflow-hidden">
+                <button @click="open = open === 2 ? null : 2" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-dark-card transition-colors">
+                    <span class="font-medium text-sm">Metode pembayaran apa saja yang tersedia?</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" :class="open === 2 && 'rotate-180'"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open === 2" x-transition class="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400">
+                    Saat ini kami menerima pembayaran melalui QRIS (scan menggunakan e-wallet atau m-banking). Semua bank dan e-wallet yang support QRIS bisa digunakan (OVO, GoPay, DANA, ShopeePay, BCA, Mandiri, dll).
+                </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="border border-gray-200 dark:border-dark-border rounded-lg overflow-hidden">
+                <button @click="open = open === 3 ? null : 3" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-dark-card transition-colors">
+                    <span class="font-medium text-sm">Bagaimana sistem garansi?</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" :class="open === 3 && 'rotate-180'"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open === 3" x-transition class="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400">
+                    Setiap produk memiliki masa garansi sesuai durasinya. Jika ada masalah (tidak bisa login, akun error, dll), Anda bisa mengajukan klaim garansi melalui menu Garansi di dashboard. Admin akan merespon dan menyelesaikan masalah Anda.
+                </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="border border-gray-200 dark:border-dark-border rounded-lg overflow-hidden">
+                <button @click="open = open === 4 ? null : 4" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-dark-card transition-colors">
+                    <span class="font-medium text-sm">Apa bedanya Sharing dan Private?</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" :class="open === 4 && 'rotate-180'"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open === 4" x-transition class="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400">
+                    <strong>Sharing</strong> — Akun digunakan bersama beberapa user, harga lebih murah. <strong>Private</strong> — Akun hanya untuk Anda sendiri, tidak dibagikan ke siapapun. <strong>Semi Private</strong> — Hybrid, contohnya 1 profil Netflix untuk 2 device.
+                </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="border border-gray-200 dark:border-dark-border rounded-lg overflow-hidden">
+                <button @click="open = open === 5 ? null : 5" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-dark-card transition-colors">
+                    <span class="font-medium text-sm">Berapa lama proses setelah bayar?</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" :class="open === 5 && 'rotate-180'"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open === 5" x-transition class="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400">
+                    Setelah pembayaran dikonfirmasi, produk akan diproses dalam waktu 1-30 menit (jam operasional). Beberapa produk dengan stok tersedia akan langsung muncul otomatis di dashboard Anda.
+                </div>
+            </div>
+
+            <!-- FAQ 6 -->
+            <div class="border border-gray-200 dark:border-dark-border rounded-lg overflow-hidden">
+                <button @click="open = open === 6 ? null : 6" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-dark-card transition-colors">
+                    <span class="font-medium text-sm">Kenapa order perlu approval terlebih dahulu?</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" :class="open === 6 && 'rotate-180'"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open === 6" x-transition class="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400">
+                    Untuk memastikan ketersediaan stok sebelum Anda melakukan pembayaran. Ini mencegah situasi di mana Anda sudah bayar tapi produk tidak tersedia. Proses approval biasanya hanya beberapa menit.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA -->
 <section class="py-16 bg-gray-50 dark:bg-dark-card border-t border-gray-200 dark:border-dark-border">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
