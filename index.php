@@ -165,6 +165,9 @@ $router->get('/admin/settings', 'admin/SettingController', 'index', ['auth', 'ad
 $router->post('/admin/settings', 'admin/SettingController', 'update', ['auth', 'admin']);
 $router->post('/admin/settings/qris', 'admin/SettingController', 'uploadQris', ['auth', 'admin']);
 
+// --- API Routes (No auth - for payment gateway callbacks) ---
+$router->post('/api/payment/callback', 'PaymentCallbackController', 'handle', []);
+
 // ============================================================
 // 7. DISPATCH REQUEST
 // ============================================================
