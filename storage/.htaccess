@@ -1,0 +1,8 @@
+# Allow access to uploaded files only
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Allow access to uploads directory
+    RewriteRule ^uploads/ - [L]
+    # Deny everything else
+    RewriteRule ^logs/ - [F,L]
+</IfModule>
